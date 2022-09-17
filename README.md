@@ -44,3 +44,54 @@
 |Heure de départ  |Time|Heure de départ du vol|
 
 ---
+
+## Régles de gestion
+
+### Client
+
+* Un client doit renseigner son nom, son prénom, sa date de naissance, son email et son numéro de téléphone.
+
+* Un client peut réserver plusieurs billets. Il peut également réserver pour une tier personne.
+
+* Lors d'une réservation, un client se voit attribué un passager.
+
+### Passager
+
+* Un passager a un nom, un prénom, un numéro de passeport.
+
+* Le passager peut être un client. 
+
+* On attribut, lors de la réservation, l'identifiant unique du client qui a réservé.
+
+* Le passager lui voit attribué un numéro de vol lors de la réservation.
+
+### Compagnie
+
+* La compagnie possède un nom et un identifiant.
+
+* Les vols depende des compagnies, chaque compagnie possède ces propres vols.
+
+### Vol
+
+* Un vol existe seulement lorsque la compagnie l'assure.
+
+* Un vol doit avoir une date et heure de départ, une date et heure d'arrivée, un aéroport de départ et d'arrivée, un nom de compagnie, une destination et les escales s'il y en a.
+
+* Si le client reçoit le billet, cela veut dire que le vol a été créé par la compagnie et qu'il est disponible (ouvrirVol = true). La compagnie peut toujours fermer le vol (fermerVol = true) dans ce cas le vol n'est plus disponible et le programme avertira automatiquement le client que son vol (identifié grâce à son ID) est annulé. 
+
+* Le vol dépend de la compagnie, il est créé par la compagnie et peut être aussi supprimé. 
+
+### Aéroport 
+
+* Un aéroport peut avoir plusieurs vols. 
+
+* Un aéroport dessert plusieurs villes.
+
+### Escale 
+
+* Une escale est un héritage de l'aéroport au vu des escales qui peuvent pas être des destinations finales.
+
+* L'escale possède une heure d'arrivée, une heure de départ et un identifiant.
+
+---
+
