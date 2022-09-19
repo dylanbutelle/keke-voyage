@@ -30,8 +30,7 @@
 |Aéroport de départ|Alphanumérique|Identifiant de l'aéroport de départ du vol|
 |Aéroport d'arrivée|Alphanumérique|Identifiant de l'aéroport d'arrivée du vol|
 |Destination|Alphanumérique|Destination du vol|
-|Ouvrir_vol      |Boolean|Ouverture de la réservation par la compagnie|
-|Fermer_vol      |Boolean|Fermeture de la réservation par la compagnie|
+|Etat_vol      |Boolean|Vérification d'ouverture ou de fermeture du vol|
 |Escale          |Alphanumérique|Identifiant de l'aéroport de l'escale|
 |////////////////|///////////////////////////////|/////////////////////////////|
 |ID_Aéroport     |Alphanumérique|Identifiant de l'aéroport|
@@ -77,7 +76,7 @@
 
 * Un vol doit avoir une date et heure de départ, une date et heure d'arrivée, un aéroport de départ et d'arrivée, un nom de compagnie, une destination et les escales s'il y en a.
 
-* Si le client reçoit le billet, cela veut dire que le vol a été créé par la compagnie et qu'il est disponible (ouvrirVol = true). La compagnie peut toujours fermer le vol (fermerVol = true) dans ce cas le vol n'est plus disponible et le programme avertira automatiquement le client que son vol (identifié grâce à son ID) est annulé. 
+* Si le client reçoit le billet, cela veut dire que le vol a été créé par la compagnie et qu'il est disponible. La compagnie peut toujours fermer le vol dans ce cas le vol n'est plus disponible et le programme avertira automatiquement le client que son vol (identifié grâce à son ID) est annulé. 
 
 * Le vol dépend de la compagnie, il est créé par la compagnie et peut être aussi supprimé. 
 
@@ -118,8 +117,7 @@ CREATE TABLE Vol(
    Date_de_départ DATETIME,
    Date_d_arrivée DATETIME,
    Destination VARCHAR(50),
-   Ouvrir_Vol LOGICAL,
-   Fermer_Vol LOGICAL,
+   Etat_Vol LOGICAL,
    PRIMARY KEY(Id_Vol, Compagnie, Aéroport_de_départ, Aéroport_d_arrivée, Escale)
 );
 
@@ -217,6 +215,7 @@ CREATE TABLE Decollage(
    FOREIGN KEY(Id_Vol, Compagnie, Aéroport_de_départ, Aéroport_d_arrivée, Escale) REFERENCES Vol(Id_Vol, Compagnie, Aéroport_de_départ, Aéroport_d_arrivée, Escale),
    FOREIGN KEY(Id_Aéroport, Vols_au_départ, Vols_à_l_arrivée) REFERENCES Aéroport(Id_Aéroport, Vols_au_départ, Vols_à_l_arrivée)
 );
+
 ```
 ---
 
@@ -224,7 +223,7 @@ CREATE TABLE Decollage(
 
 ```
 Client = (Id_Client COUNTER, Id_Passager VARCHAR(50), Nom VARCHAR(50), Prénom VARCHAR(50), Date_de_naissance DATE, Email VARCHAR(50), Numéro_de_téléphone VARCHAR(50));
-Vol = (Id_Vol COUNTER, Compagnie VARCHAR(50), Aéroport_de_départ VARCHAR(50), Aéroport_d_arrivée VARCHAR(50), Escale VARCHAR(50), Date_de_départ DATETIME, Date_d_arrivée DATETIME, Destination VARCHAR(50), Ouvrir_Vol LOGICAL, Fermer_Vol LOGICAL);
+Vol = (Id_Vol COUNTER, Compagnie VARCHAR(50), Aéroport_de_départ VARCHAR(50), Aéroport_d_arrivée VARCHAR(50), Escale VARCHAR(50), Date_de_départ DATETIME, Date_d_arrivée DATETIME, Destination VARCHAR(50), Etat_Vol LOGICAL);
 Compagnie = (Id_Compagnie COUNTER, Nom VARCHAR(50));
 Aéroport = (Id_Aéroport COUNTER, Vols_au_départ VARCHAR(50), Vols_à_l_arrivée VARCHAR(50), Villes_desservies VARCHAR(50));
 Passager = (Id_Passager COUNTER, Id_Vol COUNTER, Id_Client VARCHAR(50), Nom VARCHAR(50), Prenom VARCHAR(50), Numéro_de_passeport VARCHAR(50));
